@@ -1,11 +1,21 @@
-"user_id,timestamp,ip_address,country,device_type,browser,login_status,failed_attempts"
-"U001,2026-04-01 08:12:23,192.168.1.1,USA,Mobile,Chrome,Success,0"
-"U002,2026-04-01 08:15:10,192.168.1.2,USA,Laptop,Edge,Failure,3"
-"U003,2026-04-01 08:20:45,10.0.0.1,Nigeria,Mobile,Chrome,Failure,5"
-"U001,2026-04-01 08:25:12,192.168.1.1,USA,Mobile,Chrome,Success,0"
-"U004,2026-04-01 08:30:55,172.16.0.1,UK,Laptop,Firefox,Failure,4"
-"U005,2026-04-01 08:35:22,10.0.0.2,Canada,Tablet,Safari,Success,0"
-"U002,2026-04-01 08:40:10,192.168.1.2,USA,Laptop,Edge,Failure,6"
-"U003,2026-04-01 08:45:33,10.0.0.1,Nigeria,Mobile,Chrome,Success,0"
-"U006,2026-04-01 08:50:00,8.8.8.8,Unknown,Laptop,Chrome,Failure,10"
-"U007,2026-04-01 08:55:45,8.8.4.4,Unknown,Mobile,Chrome,Failure,8"
+﻿user_id,timestamp,ip_address,country,device_type,browser,login_status,failed_attempts
+U001,3/20/2026 8:12,192.168.1.1,USA,Mobile,Chrome,Success,0
+U002,3/20/2026 8:15,192.168.1.2,USA,Laptop,Edge,Failure,3
+U003,3/21/2026 9:20,10.0.0.1,Nigeria,Mobile,Chrome,Failure,5
+U001,3/21/2026 9:25,192.168.1.1,USA,Mobile,Chrome,Success,0
+U004,3/22/2026 10:30,172.16.0.1,UK,Desktop,Firefox,Failure,4
+U005,3/22/2026 11:35,10.0.0.2,Canada,Tablet,Safari,Success,0
+U002,3/23/2026 12:40,192.168.1.2,USA,Laptop,Edge,Failure,6
+U003,3/23/2026 13:45,10.0.0.1,Nigeria,Mobile,Chrome,Success,0
+U006,3/24/2026 14:50,8.8.8.8,Unknown,Desktop,Chrome,Failure,10
+U007,3/24/2026 15:55,8.8.4.4,Unknown,Mobile,Chrome,Failure,8
+U001,3/25/2026 2:00,45.33.32.1,Nigeria,Laptop,Firefox,Failure,9
+U001,3/25/2026 2:01,45.33.32.1,Nigeria,Laptop,Firefox,Failure,10
+U001,3/25/2026 2:02,45.33.32.1,Nigeria,Laptop,Firefox,Failure,10
+U008,3/26/2026 3:15,203.0.113.5,Unknown,Desktop,Brave,Failure,7
+U009,3/27/2026 4:45,198.51.100.23,USA,Desktop,Chrome,Success,0
+U010,3/28/2026 16:20,192.0.2.1,UK,Laptop,Opera,Failure,2
+U011,3/29/2026 18:35,203.0.113.25,Canada,Mobile,Safari,Success,0
+U012,3/30/2026 21:10,198.51.100.45,USA,Desktop,Chrome,Failure,4
+U006,3/30/2026 21:12,8.8.8.8,Unknown,Desktop,Chrome,Failure,9
+U006,3/30/2026 21:13,8.8.8.8,Unknown,Desktop,Chrome,Failure,10
