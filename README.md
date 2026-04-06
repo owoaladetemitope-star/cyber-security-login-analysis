@@ -1,10 +1,9 @@
 # Cyber Threat Detection System
 
 ## Overview
-This project is a cybersecurity analytics system designed to detect suspicious login behavior, identify potential brute force attacks, and highlight highrisk users and IP addresses.
-It simulates how real world security teams monitor login activity and respond to potential threats using data analysis and visualization.
+This project simulates a real world Security Operations Center (SOC) system that monitors login activity to detect potential cyber threats such as brute force attacks and suspicious user behavior. It analyzes authentication logs, identifies hig-risk entities, and generates actionable alerts through an interactive dashboard.
 
-## 🔍 Key Features
+## Key Features
 
 * Detects repeated failed login attempts (brute force patterns)
 * Identifies highrisk IP addresses and users
@@ -34,7 +33,7 @@ It simulates how real world security teams monitor login activity and respond to
 * Users with multiple login failures are identified for further investigation
 * Attack activity is analyzed by hour to detect unusual patterns
 
-## 🚀 How to Run
+## How to Run
 
 Install dependencies:
 
@@ -44,14 +43,14 @@ Run the application:
 
 streamlit run app.py
 
-## 💡 Future Improvements
+## Future Improvements
 
 * Real time log streaming instead of static data
 * Integration with external threat intelligence (IP reputation APIs)
 * Machine learning for anomaly detection
 * Deployment to cloud (AWS / Azure)
 
-## 🎯 Purpose
+## Purpose
 
 This project demonstrates practical cybersecurity skills including:
 
@@ -60,4 +59,12 @@ This project demonstrates practical cybersecurity skills including:
 * SQL database usage
 * Dashboard development
 
+## Real World Relevance
+
+This system reflects how security analysts monitor authentication logs to detect:
+- Brute force attacks
+- Account compromise attempts
+- Suspicious login patterns
+
+This project demonstrates hands-on skills used in real cybersecurity roles including SOC analysis, threat detection, and security data investigation.
 It is designed to simulate real world security monitoring systems used by analysts in Security Operations Centers (SOC).
