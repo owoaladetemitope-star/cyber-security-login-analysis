@@ -68,3 +68,4 @@ This system reflects how security analysts monitor authentication logs to detect
 
 This project demonstrates hands-on skills used in real cybersecurity roles including SOC analysis, threat detection, and security data investigation.
 It is designed to simulate real world security monitoring systems used by analysts in Security Operations Centers (SOC).
+This project also applies data analysis techniques to identify patterns, trends, and anomalies in login behavior.
