@@ -1,7 +1,7 @@
 # Cyber Threat Detection System
 
 ## Overview
-This project simulates a real world Security Operations Center (SOC) system that monitors login activity to detect potential cyber threats such as brute force attacks and suspicious user behavior. It analyzes authentication logs, identifies hig-risk entities, and generates actionable alerts through an interactive dashboard.
+This project simulates a real world Security Operations Center (SOC) system that monitors login activity to detect potential cyber threats such as brute force attacks and suspicious user behavior. It analyzes authentication logs, identifies hig-risk entities, and generates actionable alerts through an interactive dashboard. The project also applies data analysis techniques to uncover patterns, trends, and anomalies in login behavior, making it relevant for both cybersecurity and data focused roles.
 
 ## Key Features
 
@@ -12,12 +12,32 @@ This project simulates a real world Security Operations Center (SOC) system that
 * Generates real time alerts for suspicious activity
 * Displays findings in an interactive dashboard
 
+## Real World Relevance
+
+This system reflects how security analysts monitor authentication logs to detect:
+- Brute force attacks
+- Account compromise attempts
+- Suspicious login patterns
+
+It also demonstrates how data analysis is used in real world systems to:
+- Identify trends in user behavior
+- Detect anomalies in large datasets
+- Support decision making with data insights
+
+## Data Analysis Components
+
+- Data cleaning and preprocessing using python(pandas)
+- Grouping and aggregation of login data
+- Pattern detection using thresholds and behavior analysis
+- Time based trend analysis (hourly attack patterns)
+- Visualization of suspicious activity using charts
+
 ## Technologies/Tools Used
 
-* **Python** (pandas, matplotlib)
-* **SQL (SQLite)** for data storage
-* **Streamlit** for building the dashboard
-* Data analysis and anomaly detection techniques
+- **Python** (pandas, matplotlib)
+- **SQL (SQLite)** for data storage and querying
+- **Streamlit** for building the interactive dashboard
+- Data analysis and anomaly detection techniques
 
 ## How It Works
 
@@ -52,20 +72,13 @@ streamlit run app.py
 
 ## Purpose
 
-This project demonstrates practical cybersecurity skills including:
+This project demonstrates practical skills used in both cybersecurity and data roles, including:
 
-* Threat detection
-* Data analysis
-* SQL database usage
-* Dashboard development
+- Threat detection and security analysis
+- Data analysis and pattern recognition
+- SQL database usage
+- Dashboard development and data visualization
 
-## Real World Relevance
-
-This system reflects how security analysts monitor authentication logs to detect:
-- Brute force attacks
-- Account compromise attempts
-- Suspicious login patterns
-
-This project demonstrates hands-on skills used in real cybersecurity roles including SOC analysis, threat detection, and security data investigation.
+This project demonstrates hands on skills used in real cybersecurity roles including SOC analysis, threat detection, and security data investigation.
 It is designed to simulate real world security monitoring systems used by analysts in Security Operations Centers (SOC).
 This project also applies data analysis techniques to identify patterns, trends, and anomalies in login behavior.
