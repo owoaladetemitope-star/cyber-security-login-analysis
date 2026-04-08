@@ -1,84 +1,59 @@
-# Cyber Threat Detection System
+# Cyber Threat Detection & Investigation System
 
 ## Overview
-This project simulates a real world Security Operations Center (SOC) system that monitors login activity to detect potential cyber threats such as brute force attacks and suspicious user behavior. It analyzes authentication logs, identifies hig-risk entities, and generates actionable alerts through an interactive dashboard. The project also applies data analysis techniques to uncover patterns, trends, and anomalies in login behavior, making it relevant for both cybersecurity and data focused roles.
+This project simulates a realworld Security Operations Center (SOC) system that monitors authentication logs to detect potential cyber threats. The system analyzes login activity, detects suspicious behavior, assigns dynamic risk scores, and provides an interactive dashboard for investigation and incident tracking. It is designed to reflect how cybersecurity analysts detect and respond to threats in real environments.
 
 ## Key Features
+- Detects brute force attacks using repeated failed login attempts  
+- Identifies high-risk users and IP addresses  
+- Implements behavior based detection (unusual login times)  
+- Calculates dynamic risk scores (0–100) based on multiple factors  
+- Assigns risk levels (Low, Medium, High) automatically  
+- Generates real time alerts for suspicious activity  
+- Provides an investigation panel to analyze user/IP behavior  
+- Includes an incident tracking system with status and assignment  
+- Visualizes attack patterns and trends 
 
-* Detects repeated failed login attempts (brute force patterns)
-* Identifies highrisk IP addresses and users
-* Assigns risk levels (Low, Medium, High) based on behavior
-* Analyzes attack patterns by time (hourly trends)
-* Generates real time alerts for suspicious activity
-* Displays findings in an interactive dashboard
+## System Workflow
+1. Login data is loaded into a SQL database  
+2. The system processes authentication logs using Python  
+3. Behavioral and threshold based detection logic is applied  
+4. Each record is assigned a risk score and classification  
+5. Alerts are generated for suspicious activity  
+6. Analysts can investigate entities using the dashboard  
+7. Incidents are tracked and monitored
 
-## Real World Relevance
+## Technologies Used
+- Python (pandas, matplotlib)  
+- SQLite (data storage and querying)  
+- Streamlit (interactive dashboard)  
+- Data analysis and anomaly detection techniques 
 
-This system reflects how security analysts monitor authentication logs to detect:
-- Brute force attacks
-- Account compromise attempts
-- Suspicious login patterns
-
-It also demonstrates how data analysis is used in real world systems to:
-- Identify trends in user behavior
-- Detect anomalies in large datasets
-- Support decision making with data insights
-
-## Data Analysis Components
-
-- Data cleaning and preprocessing using python(pandas)
-- Grouping and aggregation of login data
-- Pattern detection using thresholds and behavior analysis
-- Time based trend analysis (hourly attack patterns)
-- Visualization of suspicious activity using charts
-
-## Technologies/Tools Used
-
-- **Python** (pandas, matplotlib)
-- **SQL (SQLite)** for data storage and querying
-- **Streamlit** for building the interactive dashboard
-- Data analysis and anomaly detection techniques
-
-## How It Works
-
-1. Login data is loaded from a CSV file into a SQL database
-2. The system analyzes login activity using Python
-3. Failed login attempts are tracked and grouped
-4. Suspicious behavior is identified based on thresholds and patterns
-5. Results are displayed in a dashboard with alerts and visualizations
-
-## Example Insights
-
-* IP addresses with repeated failed login attempts are flagged as high risk
-* Users with multiple login failures are identified for further investigation
-* Attack activity is analyzed by hour to detect unusual patterns
+## Example Use Cases
+- Detecting brute force login attempts  
+- Identifying compromised accounts  
+- Investigating suspicious login behavior  
+- Monitoring attack patterns over time  
+- Supporting security decision-making with data
 
 ## How to Run
-
 Install dependencies:
-
 pip install streamlit pandas matplotlib
-
 Run the application:
-
-streamlit run app.py
+python -m streamlit run app.py
 
 ## Future Improvements
-
-* Real time log streaming instead of static data
-* Integration with external threat intelligence (IP reputation APIs)
-* Machine learning for anomaly detection
-* Deployment to cloud (AWS / Azure)
+- Real-time log ingestion instead of static datasets  
+- Integration with external threat intelligence APIs  
+- Machine learning-based anomaly detection  
+- Cloud deployment (AWS / Azure)  
+- User authentication and role-based access 
 
 ## Purpose
-
-This project demonstrates practical skills used in both cybersecurity and data roles, including:
-
-- Threat detection and security analysis
-- Data analysis and pattern recognition
-- SQL database usage
-- Dashboard development and data visualization
-
-This project demonstrates hands on skills used in real cybersecurity roles including SOC analysis, threat detection, and security data investigation.
-It is designed to simulate real world security monitoring systems used by analysts in Security Operations Centers (SOC).
-This project also applies data analysis techniques to identify patterns, trends, and anomalies in login behavior.
+This project demonstrates practical skills used in cybersecurity and data roles, including:
+- Security monitoring and threat detection  
+- Behavioral analysis and risk scoring  
+- SQL data handling  
+- Dashboard development and data visualization  
+- Investigation and incident response workflows  
+This system is designed to simulate real SOC analyst workflows and demonstrate the ability to build data driven security solutions.

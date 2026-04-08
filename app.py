@@ -8,7 +8,7 @@ df = pd.read_sql_query("SELECT * FROM login_data", conn)
 
 st.set_page_config(page_title="Cyber Threat Detection System", layout="wide")
 
-st.title(" Cyber Threat Detection System")
+st.title("Cyber Threat Detection & Investigation System")
 st.write("Detects suspicious login activity, high-risk IPs, and potential attacks.")
 st.title("Cyber Threat Detection & Investigation System")
 
