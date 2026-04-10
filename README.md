@@ -7,7 +7,8 @@ This project simulates a realworld Security Operations Center (SOC) system that 
 - Detects brute force attacks using repeated failed login attempts  
 - Identifies high-risk users and IP addresses  
 - Implements behavior based detection (unusual login times)  
-- Calculates dynamic risk scores (0–100) based on multiple factors  
+- Calculates dynamic risk scores (0–100) based on multiple factors
+-Implements AI-based anomaly detection using Isolation Forest to identify unusual login behavior  
 - Assigns risk levels (Low, Medium, High) automatically  
 - Generates real time alerts for suspicious activity  
 - Provides an investigation panel to analyze user/IP behavior  
@@ -17,11 +18,15 @@ This project simulates a realworld Security Operations Center (SOC) system that 
 ## System Workflow
 1. Login data is loaded into a SQL database  
 2. The system processes authentication logs using Python  
-3. Behavioral and threshold based detection logic is applied  
+3. Behavioral, threshold-based, and AI anomaly detection logic is applied  
 4. Each record is assigned a risk score and classification  
 5. Alerts are generated for suspicious activity  
 6. Analysts can investigate entities using the dashboard  
 7. Incidents are tracked and monitored
+
+## AI Integration
+
+This system includes an anomaly detection model using Isolation Forest, an unsupervised machine learning algorithm that identifies unusual login behavior based on patterns in the data. This enhances detection beyond rule-based methods by flagging previously unseen attack patterns.
 
 ## Technologies Used
 - Python (pandas, matplotlib)  
@@ -44,8 +49,7 @@ python -m streamlit run app.py
 
 ## Future Improvements
 - Real-time log ingestion instead of static datasets  
-- Integration with external threat intelligence APIs  
-- Machine learning-based anomaly detection  
+- Integration with external threat intelligence APIs   
 - Cloud deployment (AWS / Azure)  
 - User authentication and role-based access 
 
