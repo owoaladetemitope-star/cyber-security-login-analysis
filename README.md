@@ -25,7 +25,6 @@ This project simulates a realworld Security Operations Center (SOC) system that 
 7. Incidents are tracked and monitored
 
 ## AI Integration
-
 This system includes an anomaly detection model using Isolation Forest, an unsupervised machine learning algorithm that identifies unusual login behavior based on patterns in the data. This enhances detection beyond rule-based methods by flagging previously unseen attack patterns.
 
 ## Technologies Used
