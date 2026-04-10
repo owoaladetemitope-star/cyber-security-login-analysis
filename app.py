@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import sqlite3
+from sklearn.ensemble import IsolationForest
 
 conn = sqlite3.connect("cyber_login.db")
 df = pd.read_sql_query("SELECT * FROM login_data", conn)
@@ -10,7 +11,6 @@ st.set_page_config(page_title="Cyber Threat Detection System", layout="wide")
 
 st.title("Cyber Threat Detection & Investigation System")
 st.write("Detects suspicious login activity, high-risk IPs, and potential attacks.")
-st.title("Cyber Threat Detection & Investigation System")
 
 st.markdown("""
 ### Real-Time Security Monitoring Dashboard
@@ -44,6 +44,20 @@ def get_risk_level(score):
     else:
         return "Low"
 df["risk_level"] = df["risk_score"].apply(get_risk_level)
+# ---------------- AI ANOMALY DETECTION ----------------
+
+df["login_failed"] = (df["login_status"] == "failure").astype(int)
+
+ai_features = df[["failed_attempts", "hour", "login_failed"]].copy()
+
+model = IsolationForest(contamination=0.15, random_state=42)
+df["anomaly"] = model.fit_predict(ai_features)
+
+df["anomaly_label"] = df["anomaly"].apply(
+    lambda x: "Suspicious" if x == -1 else "Normal"
+)
+
+anomaly_df = df[df["anomaly"] == -1]
 
 failed_df = df[df["login_status"] == "failure"]
 
@@ -56,12 +70,13 @@ user_failures = failed_df.groupby("user_id")["failed_attempts"].sum().reset_inde
 high_risk_ips = ip_failures[ip_failures["failed_attempts"] >= 5]
 high_risk_users = user_failures[user_failures["failed_attempts"] >= 5]
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 col1.metric("Total Logins", total_logins)
 col2.metric("Failed Logins", total_failures)
 col3.metric("High Risk IPs", len(high_risk_ips))
 col4.metric("High Risk Users", len(high_risk_users))
+col5.metric("AI Anomalies", len(anomaly_df))
 
 ip_failures["risk_level"] = ip_failures["failed_attempts"].apply(
     lambda x: "High" if x >= 5 else "Medium" if x >= 3 else "Low"
@@ -129,6 +144,23 @@ ax.set_ylabel("Failures")
 ax.set_title("Attack Timing Pattern")
 
 st.pyplot(fig)
+st.divider()
+st.subheader("AI Detected Suspicious Logins")
+
+st.dataframe(
+    anomaly_df[
+        [
+            "user_id",
+            "timestamp",
+            "ip_address",
+            "failed_attempts",
+            "hour",
+            "risk_score",
+            "anomaly_label",
+        ]
+    ],
+    use_container_width=True
+)
 st.subheader("Full Failed Login Records")
 st.dataframe(df[["user_id", "ip_address", "failed_attempts", "hour", "risk_score", "risk_level"]])
 st.divider()
