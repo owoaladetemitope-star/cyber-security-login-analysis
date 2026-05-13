@@ -2,7 +2,39 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import sqlite3
+import requests
+import json
 from sklearn.ensemble import IsolationForest
+from event_logger import log_security_event
+
+def check_ip_reputation(ip):
+    suspicious_ips = ["8.8.8.8", "45.33.32.1", "203.0.113.5"]
+
+    if ip in suspicious_ips:
+        return "Suspicious"
+    else:
+        return "Clean"
+    
+def get_mitre_technique(event_type):
+    mitre_map = {
+        "Brute Force Attack": "T1110 - Brute Force",
+        "Suspicious User Activity": "T1078 - Valid Accounts",
+        "Unusual Login Time": "T1078 - Valid Accounts"
+    }
+
+    return mitre_map.get(event_type, "Unknown Technique")
+def lookup_ip_country(ip):
+    private_ips = ["192.168", "10.", "172.16"]
+
+    if any(ip.startswith(p) for p in private_ips):
+        return "Internal / Trusted"
+
+    try:
+        response = requests.get(f"http://ip-api.com/json/{ip}")
+        data = response.json()
+        return data.get("country", "Unknown")
+    except:
+        return "Unknown"
 
 conn = sqlite3.connect("cyber_login.db")
 df = pd.read_sql_query("SELECT * FROM login_data", conn)
@@ -88,13 +120,37 @@ st.divider()
 st.subheader("Alerts")
 
 for _, row in high_risk_ips.iterrows():
-    st.error(f"Possible brute force attack from IP {row['ip_address']} ({row['failed_attempts']} failures)")
+    reputation = check_ip_reputation(row["ip_address"])
+    mitre = get_mitre_technique("Brute Force Attack")
+    country = lookup_ip_country(row["ip_address"])
+
+    st.error(
+    f"Possible brute force attack from IP {row['ip_address']} "
+    f"({row['failed_attempts']} failures) | Country: {country} | Reputation: {reputation} | MITRE: {mitre}"
+)
+
+    log_security_event(
+        event_type="Brute Force Attack",
+        source_ip=row["ip_address"],
+        user="Unknown",
+        severity="High"
+    )
 
 for _, row in high_risk_users.iterrows():
-    st.warning(f"User {row['user_id']} has multiple failed login attempts ({row['failed_attempts']})")
-# Unusual login time alerts
-unusual_logins = df[df["unusual_time"] == 1]
+    mitre = get_mitre_technique("Suspicious User Activity")
 
+    st.warning(
+        f"User {row['user_id']} has multiple failed login attempts "
+        f"({row['failed_attempts']}) | MITRE: {mitre}"
+    )
+
+    log_security_event(
+        event_type="Suspicious User Activity",
+        source_ip="Unknown",
+        user=row["user_id"],
+        severity="Medium"
+    )
+unusual_logins = df[df["unusual_time"] == 1]
 for _, row in unusual_logins.iterrows():
     st.warning(f"Unusual login time detected for user {row['user_id']} at hour {row['hour']}")
 
@@ -166,31 +222,50 @@ st.dataframe(df[["user_id", "ip_address", "failed_attempts", "hour", "risk_score
 st.divider()
 st.subheader("Investigation Panel")
 
-search_value = st.text_input("Enter User ID or IP Address")
+search_term = st.text_input("Enter User ID or IP Address")
 
-if search_value:
+if search_term:
     results = df[
-        (df["user_id"] == search_value) |
-        (df["ip_address"] == search_value)
+        (df["user_id"].astype(str).str.contains(search_term, case=False)) |
+        (df["ip_address"].astype(str).str.contains(search_term, case=False))
     ]
 
     if not results.empty:
-        st.write("### Matching Records")
-        st.dataframe(results)
+        st.success(f"Found {len(results)} matching records")
+        st.dataframe(results, use_container_width=True)
 
-        st.write("### Summary")
-        st.write(f"Total Records: {len(results)}")
-        st.write(f"Total Failures: {results['failed_attempts'].sum()}")
-        st.write(f"Average Risk Score: {results['risk_score'].mean():.2f}")
+        st.write("### Threat Hunt Summary")
+        st.write(f"Total Matches: {len(results)}")
+        st.write(f"Total Failed Attempts: {results['failed_attempts'].sum()}")
+        st.write(f"Highest Risk Score: {results['risk_score'].max()}")
     else:
-        st.warning("No records found")
+        st.warning("No matching records found")
 
 st.divider()
 st.subheader("Incident Tracker")
+incident_status = st.selectbox(
+    "Update Incident Status",
+    ["Open", "Investigating", "Escalated", "Resolved"]
+)
 
-incident_tracker = incident_df.copy()
-incident_tracker["Status"] = "Open"
-incident_tracker["Assigned To"] = "Analyst 1"
+assigned_analyst = st.selectbox(
+    "Assign Analyst",
+    ["Analyst 1", "Analyst 2", "Analyst 3"]
+)
+
+incident_tracker = pd.DataFrame(incidents)
+incident_tracker["Status"] = incident_status
+incident_tracker["Assigned To"] = assigned_analyst
+
 
 st.dataframe(incident_tracker, use_container_width=True)
+st.divider()
+st.subheader("SIEM Event Viewer")
+
+with open("security_events.json", "r") as f:
+    logs = [json.loads(line) for line in f]
+
+logs_df = pd.DataFrame(logs)
+
+st.dataframe(logs_df, use_container_width=True)
 conn.close()
