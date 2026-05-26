@@ -19,6 +19,14 @@ This project simulates a realworld Security Operations Center (SOC) system that 
 - Logs security events in SIEM-style JSON format
 - Includes a SIEM Event Viewer dashboard
 - Visualizes attack patterns and threat metrics
+- Integrates security event logs into Splunk for SIEM monitoring and event analysis
+
+## Splunk SIEM Integration
+This project integrates Python-generated JSON security alerts into Splunk for SIEM monitoring, event search, and investigation workflows.
+Security events such as brute force attacks and suspicious user activity are ingested into Splunk, where they can be searched, analyzed, and reviewed as part of a simulated SOC investigation workflow.
+
+### Splunk Event Monitoring
+![Splunk SIEM Dashboard](splunk_dashboard.png)
 
 ## System Workflow
 1. Login data is loaded into a SQLite database
@@ -43,8 +51,9 @@ This system includes an anomaly detection model using Isolation Forest, an unsup
 - Scikit-learn
 - Matplotlib
 - Requests API
-- JSON logging
-- MITRE ATT&CK framework concepts 
+- JSON Security Event Logging
+- Splunk SIEM
+- MITRE ATT&CK framework 
 
 ## Example Use Cases
 - Detecting brute force login attacks
@@ -53,6 +62,8 @@ This system includes an anomaly detection model using Isolation Forest, an unsup
 - Monitoring security alerts
 - Tracking incidents through analyst workflows
 - Reviewing SIEM-style security logs
+- Searching and analyzing security alerts in Splunk SIEM
+- Alert triage using real security event logs
 
 ## How to Run
 Install dependencies:
